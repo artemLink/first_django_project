@@ -1,0 +1,36 @@
+{% extends 'mysite/sample.html' %}
+
+{% block title %}
+Листи
+{% endblock%}
+
+{% block content %}
+
+  {% if user.is_authenticated %}
+<table class="users-table">
+            <tr>
+                <th>Відправник</th>
+                <th>Заголовок</th>
+                <th>Текст листа</th>
+                <th></th>
+            </tr>
+        {% for dat in data %}
+            <tr>
+
+                <td>{{ dat.sender }}</td>
+                <td>{{ dat.title }}</td>
+                <td>{{ dat.full_text}}</td>
+                <td>
+                        {% csrf_token %}
+                    <form action ="/send_msg" method="post">
+                        {% csrf_token %}
+                    <button name="user_id_to" value="{{ user.id }}">Відповісти</button>
+                        </form>
+                </td>
+            </tr>
+        {% endfor %}
+            </table>
+  {% else %}
+    <p>Please login to see this page.</p>
+  {% endif %}
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends 'mysite/sample.html' %}
+
+{% block title %}
+Користувачі
+{% endblock%}
+
+{% block content %}
+
+
+  {% if user.is_authenticated %}
+        <table class="users-table">
+            <tr>
+                <th>id</th>
+                <th>username</th>
+                <th>Час останньої активності</th>
+                <th></th>
+            </tr>
+        {% for user in users %}
+            <tr>
+
+                <td>{{ user.id }}</td>
+                <td>{{ user.username }}</td>
+                <td>{{ user.last_login}}</td>
+                <td>
+                    <form action ="/send_msg" method="post">
+                        {% csrf_token %}
+                    <button name="user_id_to" value="{{ user.id }}">Написати</button>
+                        </form>
+                </td>
+            </tr>
+        {% endfor %}
+            </table>
+  {% else %}
+    <p>Увійдіть, щоб побачити цю сторінку</p>
+  {% endif %}
+
+
+{% endblock %}

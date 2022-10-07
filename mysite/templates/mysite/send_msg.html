@@ -1,0 +1,16 @@
+{% extends 'mysite/sample.html' %}
+
+{% block content %}
+
+<div>
+    <h1>Напишіть лист користувачу {{ user_id_to }}</h1>
+    <form method="post" action="/mail">
+        {% csrf_token %}
+        <span>{{ error }}</span><br>
+        <input type="text" placeholder="Мета" name="title"><br>
+        <input type="text" placeholder="Текст листа" name="full_text"><br>
+        <button class="btn btn-succes" type="submit" name="user_id_to" value="{{ user_id_to }}">Надіслати</button>
+    </form>
+</div>
+
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends 'mysite/sample.html' %}
+
+{% block title %}
+Main page
+{% endblock%}
+
+{% block content %}
+<div class="main-text">
+    <h4>Ви можете обмінюватись повідомленнями<br>
+        з іншими користувачами нашого сервісу.<br>
+
+        {% if user.is_authenticated %}
+        Для цього виберіть користувача,<br>
+        {% else %}
+        Для цього авторизуйтесь та виберіть користувача,<br>
+        {% endif %}
+        якому хочете написати.</h4>
+</div>
+{% endblock %}
